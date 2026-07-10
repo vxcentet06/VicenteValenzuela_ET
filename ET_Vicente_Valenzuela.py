@@ -28,3 +28,51 @@ def menu():
     print("6. Salir")
     print("=====================================")
 
+def leer_opcion():
+    while True:
+        try:
+            opc = int(input("Ingresa una opcion (1-6): "))
+            if opc <= 1 or opc <= 6:
+                return opc
+            else:
+                print("Debe seleccionar una opción válida")
+        except ValueError:
+            print("Debe seleccionar una opción válida")
+
+def validar_codigo(codigo):
+    return codigo.strip() != ""
+
+def validar_origen(origen):
+    return origen.strip() != ""
+
+def validar_destino(destino):
+    return destino.strip() != ""
+
+def validar_dsitancia(distancia):
+    return distancia > 0
+
+def validar_tipo_bus(bus):
+    return bus.lower() in ['normal','semi-cama','cama']
+
+def validar_turno(turno):
+    return turno.lower() in ['dia','noche']
+
+def tiene_wifi(wifi):
+    return wifi.lower() in ['s','n']
+
+def validar_precio(precio):
+    return precio > 0
+
+def validar_asientos(asientos):
+    return asientos > 0
+
+
+
+
+
+
+
+def main():
+    while True:
+        menu()
+        opcion = leer_opcion()
