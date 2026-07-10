@@ -67,12 +67,64 @@ def validar_asientos(asientos):
     return asientos > 0
 
 
+def asientos_origen(origen, recorridos, venta):
+    total = 0
+    for codigo in recorridos:
+        if recorridos[codigo][1].lower() == origen.lower():
+            total += venta[codigo][1]
+    print(f"El total de asientos disponibles es: {total}")
 
 
 
+def busqueda_precio(recorridos, asientos, p_min, p_max):
+    encontrados = []
+    for codigo in recorridos:
+        precio = recorridos[codigo][0]
+        asientos = recorridos[codigo][1]
+        if p_min <= precio <= p_max and asientos != 0:
+            nombre = recorridos[codigo][0]
+            encontrados.append(f"{nombre}----{codigo}")
+    encontrados.sort()
+    if not encontrados:
+        print("No hay asientos por ese rango de precio")
 
+def buscar_codigo(codigo, recorridos):
+    for clave in recorridos:
+        if clave.lower() == codigo.lower():
+            return True
+        return False
 
+            
 def main():
     while True:
         menu()
         opcion = leer_opcion()
+
+        if opcion == 1:
+            c = input("Ingrese ciudad de origen a consultar: ")
+            asientos_origen(c, recorridos, venta)
+        
+        elif opcion == 2:
+            while True:
+                try:
+                    p_min = int(input("Ingrese precio minimo: "))
+                    p_max = int(input("Ingrese precio maximo: "))
+                    if p_min >= 0 and p_max >= 0 and p_min <= p_max:
+                        break
+                    else:
+                        print("")
+                except:
+                    print("error")
+            busqueda_precio(p_min,p_max,recorridos,venta)
+
+        #elif opcion == 3:
+
+
+        
+        elif opcion == 6:
+            print("Programa finalizado")
+            break
+        else:
+            print("Ingrese una opcion valida")
+
+main()
